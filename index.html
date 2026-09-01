@@ -1299,4 +1299,88 @@ var COST=[["Aliot DMCC",18000],["VNSV Art",16300],["Azurite Group FZE",14430],["
 })();
 </script>
 </body>
+ <div id="password-screen" style="
+  position: fixed;
+  inset: 0;
+  background: #0f172a;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+">
+  <div style="
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    width: 320px;
+    text-align: center;
+  ">
+    <h2 style="margin-bottom: 20px;">ANDO Treasury</h2>
+
+    <input
+      type="password"
+      id="site-password"
+      placeholder="Enter password"
+      style="
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 12px;
+      "
+    >
+
+    <button
+      onclick="checkPassword()"
+      style="
+        width: 100%;
+        padding: 12px;
+        border: 0;
+        border-radius: 8px;
+        cursor: pointer;
+      "
+    >
+      Access
+    </button>
+
+    <p id="password-error" style="
+      color: red;
+      font-size: 13px;
+      display: none;
+      margin-top: 12px;
+    ">
+      Incorrect password
+    </p>
+  </div>
+</div>
+
+<script>
+  const SITE_PASSWORD = "ANDO2026";
+
+  function checkPassword() {
+    const enteredPassword =
+      document.getElementById("site-password").value;
+
+    if (enteredPassword === SITE_PASSWORD) {
+      sessionStorage.setItem("andoAccess", "true");
+      document.getElementById("password-screen").style.display = "none";
+    } else {
+      document.getElementById("password-error").style.display = "block";
+    }
+  }
+
+  if (sessionStorage.getItem("andoAccess") === "true") {
+    document.getElementById("password-screen").style.display = "none";
+  }
+
+  document
+    .getElementById("site-password")
+    .addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    });
+</script>
 </html>
